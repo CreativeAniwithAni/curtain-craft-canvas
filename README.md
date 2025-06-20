@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/5ca4c621-5304-4e8e-8616-9576c0f2d79a
+**URL**: https://preview--curtain-craft-canvas.lovable.app/
 
 ## How can I edit this code?
 
