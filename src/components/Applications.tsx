@@ -5,22 +5,22 @@ import { ArrowRight } from 'lucide-react';
 const Applications = () => {
   const applications = [
     {
-      title: "Containment Curtains for Lathe or Grinder Projectiles",
-      description: "Heavy-duty industrial curtains designed to contain sparks, debris, and projectiles from machining operations. Perfect for lathes, grinders, and cutting equipment protection.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop",
-      features: ["Spark resistant material", "Heavy-duty construction", "Easy installation"]
+      title: "Manufacturing Floor Noise Control",
+      description: "Heavy-duty soundproof curtains designed to reduce noise pollution from manufacturing equipment, assembly lines, and production machinery. Create quieter work environments while maintaining operational efficiency.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
+      features: ["Sound absorption up to 85%", "Fire-resistant materials", "Easy installation system"]
     },
     {
-      title: "Brake Press Guarding: Why Steel Mesh Works Well",
-      description: "Combine the flexibility of curtains with steel mesh reinforcement for ultimate protection around brake press operations and heavy machinery.",
-      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
-      features: ["Steel mesh reinforced", "Impact resistant", "OSHA compliant"]
+      title: "Industrial Warehouse Sound Barriers",
+      description: "Flexible acoustic curtain solutions for warehouse environments to control noise from forklifts, conveyor systems, and loading dock operations. Ideal for creating noise zones and protecting workers.",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
+      features: ["Portable and adjustable", "Weather resistant", "High durability rating"]
     },
     {
-      title: "OSHA Approved for Flying Projectiles",
-      description: "Certified protection solutions that meet all OSHA requirements for flying projectile containment in industrial environments.",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop",
-      features: ["OSHA certified", "Flying projectile protection", "Industrial grade"]
+      title: "Power Plant & Energy Facility Acoustic Control",
+      description: "Specialized soundproof curtains engineered for power generation facilities, compressor stations, and energy plants. Meets strict industrial safety and environmental noise regulations.",
+      image: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=400&h=300&fit=crop",
+      features: ["OSHA compliant", "Temperature resistant", "Anti-static properties"]
     }
   ];
 
@@ -82,7 +82,7 @@ const Applications = () => {
           <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-2xl p-8 text-black">
             <h3 className="text-2xl font-bold mb-4">Need a Custom Solution?</h3>
             <p className="text-lg mb-6">
-              Our engineering team can design custom applications for your specific industrial needs.
+              Our engineering team can design custom soundproof curtain solutions for your specific industrial needs.
             </p>
             <button className="bg-black hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
               Contact Engineering Team
