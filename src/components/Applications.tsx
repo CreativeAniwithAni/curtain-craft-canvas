@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
+
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { RunwareService } from '../services/runwareService';
-import { toast } from "sonner";
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 
 const Applications = () => {
-  const [apiKey, setApiKey] = useState('');
-  const [generatedImages, setGeneratedImages] = useState<{[key: string]: string}>({});
-  const [isGenerating, setIsGenerating] = useState(false);
-
   const applications = [
     {
       id: 'manufacturing',
@@ -34,55 +27,6 @@ const Applications = () => {
     }
   ];
 
-  const generateImages = async () => {
-    if (!apiKey.trim()) {
-      toast.error("Please enter your Runware API key");
-      return;
-    }
-
-    setIsGenerating(true);
-    const runwareService = new RunwareService(apiKey);
-
-    try {
-      const prompts = [
-        {
-          id: 'outdoor',
-          prompt: "Industrial outdoor sound blocking panel enclosure with four walls and roof, weather-resistant padded acoustic panels around large outdoor equipment, industrial setting, professional photograph"
-        },
-        {
-          id: 'enclosures',
-          prompt: "Large industrial soundproof container enclosure with heavy doors, acoustic foam panels on walls, modular shipping container style booth for noise isolation, industrial warehouse setting, professional photograph"
-        }
-      ];
-
-      const newImages: {[key: string]: string} = {};
-
-      for (const promptData of prompts) {
-        try {
-          const result = await runwareService.generateImage({
-            positivePrompt: promptData.prompt,
-            model: "runware:100@1",
-            numberResults: 1,
-            outputFormat: "WEBP"
-          });
-          
-          newImages[promptData.id] = result.imageURL;
-          toast.success(`Generated image for ${promptData.id}`);
-        } catch (error) {
-          console.error(`Error generating ${promptData.id} image:`, error);
-          toast.error(`Failed to generate ${promptData.id} image`);
-        }
-      }
-
-      setGeneratedImages(prev => ({ ...prev, ...newImages }));
-    } catch (error) {
-      console.error('Error generating images:', error);
-      toast.error('Failed to generate images');
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-gray-900 via-black to-gray-800">
       <div className="max-w-6xl mx-auto">
@@ -94,28 +38,6 @@ const Applications = () => {
             Discover our specialized soundproof curtain solutions designed for specific 
             industrial applications and safety requirements.
           </p>
-
-          {/* API Key Input for Image Generation */}
-          <div className="max-w-md mx-auto mb-8 p-4 bg-gray-800 rounded-lg">
-            <h3 className="text-white font-semibold mb-2">Generate AI Images</h3>
-            <p className="text-gray-400 text-sm mb-3">Enter your Runware API key to generate custom images</p>
-            <div className="flex gap-2">
-              <Input
-                type="password"
-                placeholder="Enter Runware API key"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="bg-gray-700 border-gray-600 text-white"
-              />
-              <Button 
-                onClick={generateImages}
-                disabled={isGenerating}
-                className="bg-yellow-500 hover:bg-yellow-600 text-black"
-              >
-                {isGenerating ? 'Generating...' : 'Generate'}
-              </Button>
-            </div>
-          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
