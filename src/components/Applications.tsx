@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -8,7 +7,7 @@ const Applications = () => {
       id: 'manufacturing',
       title: "Manufacturing Floor Noise Control",
       description: "Heavy-duty soundproof curtains designed to reduce noise pollution from manufacturing equipment, assembly lines, and production machinery. Create quieter work environments while maintaining operational efficiency.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
+      image: "/lovable-uploads/3ff8d769-84ec-4a00-8eea-2915219b68e2.png",
       features: ["Sound absorption up to 85%", "Fire-resistant materials", "Easy installation system"]
     },
     {
