@@ -17,11 +17,8 @@ const Footer = () => {
               />
             </div>
             <h3 className="text-lg font-semibold mb-3 text-yellow-400">About Us</h3>
-            <p className="text-gray-400 text-sm text-center md:text-left mb-4">
-              Akon provides services to companies both large and small. Our staff of experts ensures that excellent services and products are supplied to each and every customer.
-            </p>
             <p className="text-gray-400 text-sm text-center md:text-left">
-              Professional noise control solutions
+              Akon provides services to companies both large and small. Our staff of experts ensures that excellent services and products are supplied to each and every customer.
             </p>
           </div>
 
