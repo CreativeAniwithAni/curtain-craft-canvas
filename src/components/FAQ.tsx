@@ -52,28 +52,28 @@ const FAQ = () => {
     <section className="py-16 px-4 bg-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl text-slate-600">
+          <p className="text-xl text-gray-600">
             Get answers to common questions about our industrial soundproof curtains
           </p>
         </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-slate-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div key={index} className="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full text-left p-6 flex justify-between items-center hover:bg-slate-100 transition-colors"
+                className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-100 transition-colors"
               >
-                <h3 className="text-lg font-semibold text-slate-800 pr-4">
+                <h3 className="text-lg font-semibold text-gray-900 pr-4">
                   {faq.question}
                 </h3>
                 {openItems.includes(index) ? (
-                  <ChevronUp className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-yellow-600 flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
                 )}
               </button>
               
@@ -81,8 +81,8 @@ const FAQ = () => {
                 openItems.includes(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
               }`}>
                 <div className="px-6 pb-6">
-                  <div className="h-px bg-slate-200 mb-4"></div>
-                  <p className="text-slate-600 leading-relaxed">
+                  <div className="h-px bg-gray-200 mb-4"></div>
+                  <p className="text-gray-600 leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
@@ -92,18 +92,18 @@ const FAQ = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="bg-blue-50 rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-slate-800 mb-4">
+          <div className="bg-yellow-50 rounded-xl p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
               Still Have Questions?
             </h3>
-            <p className="text-slate-600 mb-6">
+            <p className="text-gray-600 mb-6">
               Our acoustic specialists are here to help you find the perfect noise control solution for your facility.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-3 rounded-lg font-semibold transition-colors">
                 Call (555) 123-NOISE
               </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+              <button className="border-2 border-yellow-500 text-yellow-600 hover:bg-yellow-500 hover:text-black px-8 py-3 rounded-lg font-semibold transition-colors">
                 Email Technical Support
               </button>
             </div>
