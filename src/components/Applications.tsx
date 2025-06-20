@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { RunwareService } from '../services/runwareService';
@@ -22,7 +23,7 @@ const Applications = () => {
       id: 'outdoor',
       title: "Outdoor Sound Blocking Panels",
       description: "Completely enclose outdoor equipment with specially designed, padded industrial sound panels for demanding surroundings. Four walls and an optional roof make up these weather-resistant enclosures, therefore creating a complete sound barrier. Designed to fit your precise dimensions, they lower noise levels, improve safety, and provide simple access using either hinged or detachable wall panels.",
-      image: generatedImages['outdoor'] || "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop",
+      image: "/lovable-uploads/8875cb62-d774-4804-bf4e-481e45cce42b.png",
       features: ["Weather-resistant materials", "Custom dimensions", "Hinged or detachable panels"]
     },
     {
