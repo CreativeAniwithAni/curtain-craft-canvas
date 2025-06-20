@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Logo Section */}
+          {/* Logo and About Us Section */}
           <div className="md:col-span-1 flex flex-col items-center md:items-start">
             <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-lg" style={{ backgroundColor: '#ffe610' }}>
               <img 
@@ -16,6 +16,10 @@ const Footer = () => {
                 className="w-16 h-auto"
               />
             </div>
+            <h3 className="text-lg font-semibold mb-3 text-yellow-400">About Us</h3>
+            <p className="text-gray-400 text-sm text-center md:text-left mb-4">
+              Akon provides services to companies both large and small. Our staff of experts ensures that excellent services and products are supplied to each and every customer.
+            </p>
             <p className="text-gray-400 text-sm text-center md:text-left">
               Professional noise control solutions
             </p>

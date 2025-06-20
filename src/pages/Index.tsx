@@ -6,7 +6,6 @@ import ComparisonTable from '../components/ComparisonTable';
 import Applications from '../components/Applications';
 import Benefits from '../components/Benefits';
 import FAQ from '../components/FAQ';
-import AboutUs from '../components/AboutUs';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
 
@@ -19,7 +18,6 @@ const Index = () => {
       <Applications />
       <Benefits />
       <FAQ />
-      <AboutUs />
       <CTA />
       <Footer />
     </div>
