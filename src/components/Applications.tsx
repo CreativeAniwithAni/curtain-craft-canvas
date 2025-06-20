@@ -1,8 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { RunwareService } from '../services/runwareService';
+import { toast } from 'sonner';
 
 const Applications = () => {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedImages, setGeneratedImages] = useState<{[key: string]: string}>({});
+
   const applications = [
     {
       id: 'manufacturing',
@@ -15,17 +20,62 @@ const Applications = () => {
       id: 'outdoor',
       title: "Outdoor Sound Blocking Panels",
       description: "Completely enclose outdoor equipment with specially designed, padded industrial sound panels for demanding surroundings. Four walls and an optional roof make up these weather-resistant enclosures, therefore creating a complete sound barrier. Designed to fit your precise dimensions, they lower noise levels, improve safety, and provide simple access using either hinged or detachable wall panels.",
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop",
-      features: ["Weather-resistant materials", "Custom dimensions", "Hinged or detachable panels"]
+      image: generatedImages['outdoor'] || "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop",
+      features: ["Weather-resistant materials", "Custom dimensions", "Hinged or detachable panels"],
+      canRegenerate: true
     },
     {
       id: 'enclosures',
       title: "Soundproofing Enclosures",
       description: "Establish a peaceful haven using our specially made sound enclosures for individuals. With its four padded walls and roof, these buildings block outside noise and provide quiet areas in noisy surroundings. Perfect for offices, warehouses, or workshops when concentrated labor, meetings, or breaks call for solitude from nearby noise sources.",
-      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop",
-      features: ["Complete noise isolation", "Padded walls and roof", "Perfect for focused work"]
+      image: generatedImages['enclosures'] || "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop",
+      features: ["Complete noise isolation", "Padded walls and roof", "Perfect for focused work"],
+      canRegenerate: true
     }
   ];
+
+  const generateImage = async (applicationId: string, prompt: string) => {
+    const apiKey = localStorage.getItem('runware_api_key');
+    if (!apiKey) {
+      toast.error('Please set your Runware API key first');
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const runwareService = new RunwareService(apiKey);
+      const result = await runwareService.generateImage({
+        positivePrompt: prompt,
+        model: "runware:100@1",
+        numberResults: 1,
+        outputFormat: "WEBP",
+        CFGScale: 1,
+        scheduler: "FlowMatchEulerDiscreteScheduler",
+      });
+
+      setGeneratedImages(prev => ({
+        ...prev,
+        [applicationId]: result.imageURL
+      }));
+      
+      toast.success('Image generated successfully!');
+    } catch (error) {
+      console.error('Error generating image:', error);
+      toast.error('Failed to generate image. Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleRegenerateEnclosures = () => {
+    const prompt = "Large industrial soundproof container with heavy-duty doors, rectangular metal enclosure box for noise isolation, industrial setting, padded interior walls visible through open door, professional photography, clean modern design";
+    generateImage('enclosures', prompt);
+  };
+
+  const handleRegenerateOutdoor = () => {
+    const prompt = "Industrial outdoor sound blocking panels and enclosures, weather-resistant soundproof barriers around equipment, industrial facility with noise control panels, hinged access doors, professional industrial photography";
+    generateImage('outdoor', prompt);
+  };
 
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-gray-900 via-black to-gray-800">
@@ -50,6 +100,15 @@ const Applications = () => {
                   className="w-full h-48 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                {app.canRegenerate && (
+                  <button
+                    onClick={app.id === 'enclosures' ? handleRegenerateEnclosures : handleRegenerateOutdoor}
+                    disabled={isGenerating}
+                    className="absolute top-2 right-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors disabled:opacity-50"
+                  >
+                    {isGenerating ? 'Generating...' : 'Regenerate'}
+                  </button>
+                )}
               </div>
               
               <div className="p-6">
