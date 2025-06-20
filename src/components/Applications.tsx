@@ -1,28 +1,90 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { RunwareService } from '../services/runwareService';
+import { toast } from "sonner";
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const Applications = () => {
+  const [apiKey, setApiKey] = useState('');
+  const [generatedImages, setGeneratedImages] = useState<{[key: string]: string}>({});
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const applications = [
     {
+      id: 'manufacturing',
       title: "Manufacturing Floor Noise Control",
       description: "Heavy-duty soundproof curtains designed to reduce noise pollution from manufacturing equipment, assembly lines, and production machinery. Create quieter work environments while maintaining operational efficiency.",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
       features: ["Sound absorption up to 85%", "Fire-resistant materials", "Easy installation system"]
     },
     {
-      title: "Industrial Warehouse Sound Barriers",
-      description: "Flexible acoustic curtain solutions for warehouse environments to control noise from forklifts, conveyor systems, and loading dock operations. Ideal for creating noise zones and protecting workers.",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
-      features: ["Portable and adjustable", "Weather resistant", "High durability rating"]
+      id: 'outdoor',
+      title: "Outdoor Sound Blocking Panels",
+      description: "Completely enclose outdoor equipment with specially designed, padded industrial sound panels for demanding surroundings. Four walls and an optional roof make up these weather-resistant enclosures, therefore creating a complete sound barrier. Designed to fit your precise dimensions, they lower noise levels, improve safety, and provide simple access using either hinged or detachable wall panels.",
+      image: generatedImages['outdoor'] || "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop",
+      features: ["Weather-resistant materials", "Custom dimensions", "Hinged or detachable panels"]
     },
     {
-      title: "Power Plant & Energy Facility Acoustic Control",
-      description: "Specialized soundproof curtains engineered for power generation facilities, compressor stations, and energy plants. Meets strict industrial safety and environmental noise regulations.",
-      image: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=400&h=300&fit=crop",
-      features: ["OSHA compliant", "Temperature resistant", "Anti-static properties"]
+      id: 'enclosures',
+      title: "Soundproofing Enclosures",
+      description: "Establish a peaceful haven using our specially made sound enclosures for individuals. With its four padded walls and roof, these buildings block outside noise and provide quiet areas in noisy surroundings. Perfect for offices, warehouses, or workshops when concentrated labor, meetings, or breaks call for solitude from nearby noise sources.",
+      image: generatedImages['enclosures'] || "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop",
+      features: ["Complete noise isolation", "Padded walls and roof", "Perfect for focused work"]
     }
   ];
+
+  const generateImages = async () => {
+    if (!apiKey.trim()) {
+      toast.error("Please enter your Runware API key");
+      return;
+    }
+
+    setIsGenerating(true);
+    const runwareService = new RunwareService(apiKey);
+
+    try {
+      const prompts = [
+        {
+          id: 'outdoor',
+          prompt: "Industrial outdoor sound blocking panel enclosure with four walls and roof, weather-resistant padded acoustic panels around large outdoor equipment, industrial setting, professional photograph"
+        },
+        {
+          id: 'enclosures',
+          prompt: "Quiet soundproof booth enclosure with padded walls and ceiling, peaceful workspace inside noisy warehouse, acoustic panels, industrial interior, professional photograph"
+        }
+      ];
+
+      const newImages: {[key: string]: string} = {};
+
+      for (const promptData of prompts) {
+        try {
+          const result = await runwareService.generateImage({
+            positivePrompt: promptData.prompt,
+            model: "runware:100@1",
+            width: 400,
+            height: 300,
+            numberResults: 1,
+            outputFormat: "WEBP"
+          });
+          
+          newImages[promptData.id] = result.imageURL;
+          toast.success(`Generated image for ${promptData.id}`);
+        } catch (error) {
+          console.error(`Error generating ${promptData.id} image:`, error);
+          toast.error(`Failed to generate ${promptData.id} image`);
+        }
+      }
+
+      setGeneratedImages(prev => ({ ...prev, ...newImages }));
+    } catch (error) {
+      console.error('Error generating images:', error);
+      toast.error('Failed to generate images');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-gray-900 via-black to-gray-800">
@@ -31,10 +93,32 @@ const Applications = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Industrial Applications
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             Discover our specialized soundproof curtain solutions designed for specific 
             industrial applications and safety requirements.
           </p>
+
+          {/* API Key Input for Image Generation */}
+          <div className="max-w-md mx-auto mb-8 p-4 bg-gray-800 rounded-lg">
+            <h3 className="text-white font-semibold mb-2">Generate AI Images</h3>
+            <p className="text-gray-400 text-sm mb-3">Enter your Runware API key to generate custom images</p>
+            <div className="flex gap-2">
+              <Input
+                type="password"
+                placeholder="Enter Runware API key"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                className="bg-gray-700 border-gray-600 text-white"
+              />
+              <Button 
+                onClick={generateImages}
+                disabled={isGenerating}
+                className="bg-yellow-500 hover:bg-yellow-600 text-black"
+              >
+                {isGenerating ? 'Generating...' : 'Generate'}
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
