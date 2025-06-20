@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Logo Section */}
           <div className="md:col-span-1 flex flex-col items-center md:items-start">
-            <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mb-4 shadow-lg">
+            <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-lg" style={{ backgroundColor: '#ffe610' }}>
               <img 
                 src="/lovable-uploads/bd12a792-92ae-4f21-9948-ef310c695c14.png" 
                 alt="Akon Logo" 
