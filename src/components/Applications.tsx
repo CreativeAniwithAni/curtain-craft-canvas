@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { RunwareService } from '../services/runwareService';
@@ -52,7 +51,7 @@ const Applications = () => {
         },
         {
           id: 'enclosures',
-          prompt: "Quiet soundproof booth enclosure with padded walls and ceiling, peaceful workspace inside noisy warehouse, acoustic panels, industrial interior, professional photograph"
+          prompt: "Large industrial soundproof container enclosure with heavy doors, acoustic foam panels on walls, modular shipping container style booth for noise isolation, industrial warehouse setting, professional photograph"
         }
       ];
 
@@ -63,8 +62,6 @@ const Applications = () => {
           const result = await runwareService.generateImage({
             positivePrompt: promptData.prompt,
             model: "runware:100@1",
-            width: 400,
-            height: 300,
             numberResults: 1,
             outputFormat: "WEBP"
           });
