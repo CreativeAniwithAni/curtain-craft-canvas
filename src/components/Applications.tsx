@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { RunwareService } from '../services/runwareService';
@@ -30,7 +29,7 @@ const Applications = () => {
       id: 'enclosures',
       title: "Soundproofing Enclosures",
       description: "Establish a peaceful haven using our specially made sound enclosures for individuals. With its four padded walls and roof, these buildings block outside noise and provide quiet areas in noisy surroundings. Perfect for offices, warehouses, or workshops when concentrated labor, meetings, or breaks call for solitude from nearby noise sources.",
-      image: generatedImages['enclosures'] || "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop",
+      image: "/lovable-uploads/cd6b29fc-63dd-4f8c-a4d6-74bdd0edb0f9.png",
       features: ["Complete noise isolation", "Padded walls and roof", "Perfect for focused work"]
     }
   ];
